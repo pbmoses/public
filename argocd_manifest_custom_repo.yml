@@ -7,7 +7,6 @@ metadata:
   generation: 3
   labels:
     app: vplugin-demo
-      manager: gitops-operator
     operation: Update
   name: vplugin-demo
   namespace: vplugin-demo
