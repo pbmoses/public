@@ -55,4 +55,4 @@ spec:
       type: ""
   tls:
     ca: {}
-  version: latest
+  version: v1.2
