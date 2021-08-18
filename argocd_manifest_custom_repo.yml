@@ -1,46 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
-  creationTimestamp: "2021-05-02T20:35:28Z"
-  finalizers:
-  - argoproj.io/finalizer
-  generation: 3
-  labels:
-    app: vplugin-demo
-    operation: Update
-  name: vplugin-demo
-  namespace: vplugin-demo
+  name: philtest-vaultest
+  namespace: philtest
 spec:
-  configManagementPlugins: |-
-    - name: argocd-vault-plugin
-      generate:
-        command: ["argocd-vault-plugin"]
-        args: ["generate", "./"]
-  controller:
-    processors: {}
-  dex:
-    openShiftOAuth: true
-  grafana:
-    enabled: false
-    ingress:
-      enabled: false
-    route:
-      enabled: false
-  ha:
-    enabled: false
-  image: quay.io/pbmoses/pmo-argovault
-  initialSSHKnownHosts: {}
-  prometheus:
-    enabled: false
-    ingress:
-      enabled: false
-    route:
-      enabled: false
-  rbac: {}
-  redis: {}
-  repo:
-    mountsatoken: true
-    serviceaccount: vplugin
   server:
     autoscale:
       enabled: false
@@ -49,10 +12,84 @@ spec:
         enabled: false
     ingress:
       enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 125m
+        memory: 128Mi
     route:
       enabled: true
     service:
-      type: ""
+      type: ''
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  initialSSHKnownHosts: {}
+  rbac: {}
+  repo:
+    image: quay.io/pbmoses/pmo-argovault
+    mountsatoken: true
+    resources:
+      limits:
+        cpu: '1'
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    serviceaccount: vplugin
+    version: v1.2
+  dex:
+    openShiftOAuth: true
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  version: v1.2
+  ha:
+    enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
   tls:
     ca: {}
-  version: v1.2
+  image: quay.io/pbmoses/pmo-argovault
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  configManagementPlugins: |-
+    - name: argocd-vault-plugin
+      generate:
+        command: ["argocd-vault-plugin"]
+        args: ["generate", "./"]
+  controller:
+    processors: {}
+    resources:
+      limits:
+        cpu: '2'
+        memory: 2Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
