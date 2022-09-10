@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: argotest
-          image: curlimages/curl
+          image: registry.access.redhat.com/ubi8/ubi:8.6-903.1661794351
           env:
           - name: ACS_ADMIN_PASSWORD
             valueFrom: 
