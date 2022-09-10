@@ -1,7 +1,7 @@
 kind: Job
 apiVersion: batch/v1
 metadata:
-  name: authprovider-job
+  name: test-job
   namespace: acs
   annotations:
     argocd.argoproj.io/hook: PostSync
