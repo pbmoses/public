@@ -4,7 +4,7 @@ metadata:
   name: test-job
   namespace: acs-rox
   annotations:
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook: PreSync
 spec:
   template:
     metadata:
