@@ -20,8 +20,6 @@ spec:
                 key: password
           - name: CENTRAL
             value: https://central-acs-rox.apps.pmo-sno7.pmo.ocp.philmoses.com:443
-          - name: AUTHPROVIDER
-            value: OpenShift
           command:
             - /bin/bash
             - '-c'
