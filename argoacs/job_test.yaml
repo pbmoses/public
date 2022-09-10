@@ -25,5 +25,5 @@ spec:
             - '-k'
             - '-H'
             - | 
-            - "Authorization: Bearer ${ROX_API_TOKEN}" GET https://$CENTRAL/v1/groups
+              "Authorization: Bearer ${ROX_API_TOKEN}" GET https://$CENTRAL/v1/groups
       restartPolicy: Never
