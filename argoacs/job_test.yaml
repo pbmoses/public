@@ -26,5 +26,5 @@ spec:
             - /bin/bash
             - '-c'
             - |
-              echo "goodbye"
+              echo "goodbye my friend"
       restartPolicy: Never
