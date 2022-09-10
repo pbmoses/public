@@ -20,10 +20,5 @@ spec:
                 key: password
           - name: CENTRAL
             value: https://central-acs-rox.apps.pmo-sno7.pmo.ocp.philmoses.com:443
-          command:
-            - curl
-            - '-k'
-            - '-H'
-            - | 
-              "Authorization: Bearer ${ROX_API_TOKEN}" GET https://$(CENTRAL)/v1/groups
+          command: [ "curl", "-k", "-H", "Authorization: Bearer ${ROX_API_TOKEN}", "GET https://$(CENTRAL)/v1/groups" ]
       restartPolicy: Never
