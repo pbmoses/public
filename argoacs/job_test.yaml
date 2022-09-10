@@ -26,5 +26,5 @@ spec:
             - /bin/bash
             - '-c'
             - |
-              echo "hello"
+              echo "goodbye"
       restartPolicy: Never
