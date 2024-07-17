@@ -1,0 +1,58 @@
+---
+- name: Git tools for authoring markdown
+  hosts: all
+#running locally, no inventory file specified
+  connection: local
+  gather_facts: false
+
+## check for brew/homebrew, Sonoma will be /opt/homebrew/*
+  pre_tasks:
+    - name: Ensuring Homebrew Is Installed
+      stat:
+        path: /opt/homebrew/bin/brew 
+      register: homebrew_check
+
+    - name: OS check
+      command: uname
+      register: uname_result
+
+    - name: OS Details
+      debug:
+        msg: "{{ uname_result.stdout }}"
+
+  tasks:
+    - name: Fail If Homebrew Is Not Installed and target is a Mac 
+      fail:
+        msg: Homebrew is missing...Install from http://brew.sh/
+      when: 
+        - not homebrew_check.stat.exists
+        - uname_result.stdout == "Darwin" 
+
+##if additional iteams are needed by default, add them to the following list, or clone and edit to your desired spec. 
+    - name: Mac packages to install
+      homebrew: name={{ item }} state=present
+      with_items:
+        - pandoc
+        - wkhtmltopdf
+        - poppler
+        - node
+        - yarn
+        - shellcheck
+        - texlive
+        - exiftool
+        - qpdf
+      when: uname_result.stdout == "Darwin"
+#this is just for apt based linux that returns "Linux" check your uname output for other *nix flavors. 
+    - name: Apt packages to install
+      apt: name={{ item }} state=present
+      with_items:
+        - pandoc
+        - wkhtmltopdf
+        - poppler
+        - node
+        - yarn
+        - shellcheck
+        - texlive
+        - exiftool
+        - qpdf
+      when: uname_result.stdout == "Linux"
